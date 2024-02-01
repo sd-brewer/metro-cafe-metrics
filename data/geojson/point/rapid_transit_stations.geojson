@@ -1,0 +1,33 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "station_name": "Waterfront", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.111738155048997, 49.286075484422298 ] } },
+{ "type": "Feature", "properties": { "station_name": "VCC - Clark", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.078962252430998, 49.265783198499101 ] } },
+{ "type": "Feature", "properties": { "station_name": "Olympic Village", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.115196678993001, 49.266340232494301 ] } },
+{ "type": "Feature", "properties": { "station_name": "Broadway - City Hall", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.114782181391007, 49.262773467883399 ] } },
+{ "type": "Feature", "properties": { "station_name": "King Edward", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.115336104847003, 49.249122878380298 ] } },
+{ "type": "Feature", "properties": { "station_name": "Burrard", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.119972336442004, 49.285860149173601 ] } },
+{ "type": "Feature", "properties": { "station_name": "Marine Drive", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.117070776266999, 49.209547873924002 ] } },
+{ "type": "Feature", "properties": { "station_name": "Granville", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.116404027195003, 49.283637686800503 ] } },
+{ "type": "Feature", "properties": { "station_name": "Stadium - Chinatown", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.109564796303005, 49.279441691877601 ] } },
+{ "type": "Feature", "properties": { "station_name": "Main Street - Science World", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.100606907688004, 49.2731779118796 ] } },
+{ "type": "Feature", "properties": { "station_name": "29th Avenue", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.045940673985996, 49.244242592177301 ] } },
+{ "type": "Feature", "properties": { "station_name": "Joyce - Collingwood", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.031806717107003, 49.2383938052348 ] } },
+{ "type": "Feature", "properties": { "station_name": "Rupert", "station_line": "Millennium " }, "geometry": { "type": "Point", "coordinates": [ -123.032823831814, 49.260764777915099 ] } },
+{ "type": "Feature", "properties": { "station_name": "Renfrew", "station_line": "Millennium " }, "geometry": { "type": "Point", "coordinates": [ -123.045308458747002, 49.258892910829402 ] } },
+{ "type": "Feature", "properties": { "station_name": "Commercial - Broadway", "station_line": "Millennium " }, "geometry": { "type": "Point", "coordinates": [ -123.068453898837006, 49.262936267368403 ] } },
+{ "type": "Feature", "properties": { "station_name": "Waterfront", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.113339268900006, 49.285665767392302 ] } },
+{ "type": "Feature", "properties": { "station_name": "Vancouver City Center", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.119284089214005, 49.281734707452799 ] } },
+{ "type": "Feature", "properties": { "station_name": "Commercial - Broadway", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.069099403161999, 49.2618178464094 ] } },
+{ "type": "Feature", "properties": { "station_name": "Yaletown - Roundhouse", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.121890377796007, 49.274362254837499 ] } },
+{ "type": "Feature", "properties": { "station_name": "Oakridge - 41st Avenue", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.116040675327994, 49.233466810769301 ] } },
+{ "type": "Feature", "properties": { "station_name": "Langara - 49th Avenue", "station_line": "Canada" }, "geometry": { "type": "Point", "coordinates": [ -123.116324860846007, 49.226386919601602 ] } },
+{ "type": "Feature", "properties": { "station_name": "Nanaimo", "station_line": "Expo" }, "geometry": { "type": "Point", "coordinates": [ -123.055871516332004, 49.248272210616797 ] } },
+{ "type": "Feature", "properties": { "station_name": "Great Northern Way - Emily Carr", "station_line": "Broadway (Opens 2026)" }, "geometry": { "type": "Point", "coordinates": [ -123.093274098115998, 49.268153251448197 ] } },
+{ "type": "Feature", "properties": { "station_name": "Mount Pleasant", "station_line": "Broadway (Opens 2026)" }, "geometry": { "type": "Point", "coordinates": [ -123.101816949733006, 49.262589155667399 ] } },
+{ "type": "Feature", "properties": { "station_name": "Broadway - City Hall", "station_line": "Broadway (Opens 2026)" }, "geometry": { "type": "Point", "coordinates": [ -123.113754710698998, 49.262897985355998 ] } },
+{ "type": "Feature", "properties": { "station_name": "Oak - VGH", "station_line": "Broadway (Opens 2026)" }, "geometry": { "type": "Point", "coordinates": [ -123.124601390983997, 49.263050055262902 ] } },
+{ "type": "Feature", "properties": { "station_name": "South Granville", "station_line": "Broadway (Opens 2026)" }, "geometry": { "type": "Point", "coordinates": [ -123.137360870779005, 49.263882724438901 ] } },
+{ "type": "Feature", "properties": { "station_name": "Arbutus", "station_line": "Broadway (Opens 2026)" }, "geometry": { "type": "Point", "coordinates": [ -123.152377450935006, 49.2643001544443 ] } }
+]
+}
