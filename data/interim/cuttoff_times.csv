@@ -1,0 +1,5 @@
+,early_cutoff,late_cutoff
+weekday_open,0630,0900
+weekday_close,1600,2000
+weekend_open,0700,0930
+weekend_close,1600,2000

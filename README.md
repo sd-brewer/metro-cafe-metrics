@@ -1,75 +1,130 @@
-# competitive-analysis-open-data
-Identify business opportunities in Vancouver through competitive analysis of open API data (Google Places, Yelp, CityBikes).
+# Metro Cafe Metrics
 
-# Process
+## Introduction
 
-- decide on city
-    - Chose vancouver due to personal familiarity
-    - This analysis will primarily consist of agreegating and interpolating millions of coordinates that make up the points of interest and the contextual geometry at different scales of analysis. There are many opportunities for things to become misaligned. The capacity for error catching is significantly increased through local awareness.
-- Defining Goal of Analysis: Recommending a location for a new business entrant by comparing the competitive landscape.
-- decide on type of business
-    - limited scope to cafe's due to several practical realities
-        - cafes are ubiquitous, this ensures adequate sample size and gives flexibility to scale of analysis as I refine the project goals.
-        - Cafes have less variance in customer taste preference relative to restuarants. In a pinch, "good enough" will do.
-        - Google Places API has liberally applied place-category tags. The response data requires requires manual investigation to filter out inappropriately categorized places/venues. The cafe category simplifies this elimination process.
-            - For the purpose of this analysis "cafe" is defined as a storefront that:
-                1. serves coffee or tea
-                2. Has seating
-- Defining perimeter "location" of analysis
-    - rapid transit stations
-        - 
-        - (catchment area within 500m radius or ~5 min walk from station)
+This project analyzes the best metro station areas in Vancouver to open a new cafe, utilizing a range of metrics to estimate the existing supply of cafes and the potential demand within each metro station's vicinity.
 
-- decide on method for selecting winner:
-    - collect metrics on supply (cafe data)
-    - collect metrics on demand (develop proxy for estimating local foot traffic)
-    - find the locations with the largest supply gap (where demand is high and supply is low)
-- acquiring data
-    - map feature data
-        - city of vancouver open data portal
-            - storefront inventory
-            - bus stops
-            - parking meters
-            - bike routes
-            - neighborhood boundaries
-            - neighborhood demographics (2016 census)
-            - parks
-            - zoning districts
-        - augmented with misc data
-            - translink bus stops (Abacus Open Data, UBC Library)
-            - bikeshare stations (Citybikes api)
-    - cafe data
-        - google places api, used transit station coordinates to populate each catchment area
-        - rating, price level, operating hours
-- processing data
-    - used python and geopandas to spatial join all geojson data
-        - generated 500m buffer zone around each rapid transit station
-        - assigned station_id to all intersecting map features
-    - processed cafe data to enable comparison
-        - parse and categorize operating hours to distinguish standard vs extended hours
-- analyzing data
-    - for each rapid transit station catchment area:
-        - used spacial intersections to create count of supply/demand indicators
-- ranking options and giving recommendation
-    - used min-max normalization on all indicator data to reduce influence of outliers on conslusion
-    - developed formula for scoring supply and demand
-        - supply score:
-            - total count of cafes
-            - count of cafes with extended hours (early opens, late closes, 24hr places)
-            - count of cafes at different price levels
-                - more weight given to lower price levels with broader market appeal
-        - demand score:
-            - applying weights based on the indicators positive impact on foot traffic
-                - high impact: count of storefronts, neighborhood population density
-                - medium impact: bus stops, bikeshare stations, commercial and mixed-use zoning
-                - low impact: bike routes, parks, residential and industrial zoning
-        - supply-gap score:
-            - supply - demand
-            - rank catchments by this score to determine which areas have the most unmet demand, and therefore the lowest amount of competition for a potential new entrant
+To standardize the unit of analysis, "metro station vicinity" has been defined as a 500m radius catchment area around each station location.
+
+The metrics used in this analysis are as follows:
+
+**Supply:**
+* Count of cafes
+* Cafe operating hours
+* Cafe price levels
+
+**Demand:**
+* Count of storefronts
+* Zoning district proportions
+* Neighborhood population density
+* Count of bus stops
+* Count of bikeshare stations (Mobi)
+* Count of Bike routes
+* Count of Parking Meters
+* Count of Parks
+
+## Repository Structure
+
+The repository is structured into several directories and notebooks, each serving a specific role in the analysis:
+
+- `data/`: Contains all datasets used in the project, categorized as `external` (raw open source data), `interim` (data used between notebooks), and `processed` (final datasets used in analysis and visualizations).
+- `images/`: Holds visual aids and graphics created during the analysis.
+- `notebooks/`: Includes Jupyter notebooks that detail each step of the data processing and analysis pipeline.
+- `tableau/`: Contains Tableau workbooks used for analysis and visualization.
+
+## Data Analysis Methodology
+
+The analysis process was broken down into the following steps, with each step reflected in the notebooks within the `notebooks/` directory:
+
+1. **Data Collection**
+   * [`01_get_api_data.ipynb`:](./notebooks/01_get_api_data.ipynb)  Used APIs to collect cafe locations (Google Places API) and bikeshare station locations (Citybikes API).
+
+2. **Data Processing**
+   * [`02_process_api_data.ipynb`:](./notebooks/02_process_api_data.ipynb) Cleaned and formatted cafe data and bikeshare data. Prepared both datasets for spatial joining.
+   * [`03_process_external_data.ipynb`:](./notebooks/03_process_external_data.ipynb) Retrieved and processed external data (zoning, neighborhoods, population, etc.) from sources like the City of Vancouver Open Data Portal and Abacus Open Data Network.
+
+3. **Spatial Analysis**
+   *  [`04_join_data.ipynb`:](./notebooks/04_join_data.ipynb) Executed spatial joins between metro station catchments and spatial datasets. Established supply and demand metrics by counting intersecting features.
+
+4. **Data Merging**
+   * [`05_merge_data.ipynb`:](./notebooks/05_merge_data.ipynb) Grouped spatial datasets by type and merged them into a single GeoDataFrame for Tableau visualization. 
 
 
+## Analysis
 
-## Future Goals
-Things I would do if I had more time:
-- process and normalize venue categories to improve analysis
-- 
+For a detailed visual breakdown of individual supply and demand metrics, including, please refer to [`appendix.md`](./appendix.md). Further details regarding methodology and metric calculation can be found in the [`04_join_data.ipynb`](./notebooks/04_join_data.ipynb) notebook.
+
+### Supply Score
+
+The supply score is a composite metric that considers the total count of cafes within each metro station catchment area, along with additional weight given to cafes with extended operating hours or lower price levels. These factors are weighted as they are generally considered to be more competitive. Catchment areas are ranked according to their supply score, with higher scores depicted in red shades on the map. This indicates a greater supply of existing cafes in that area, and therefore a potentially lower suitability for opening a new cafe due to increased competition.
+
+
+<img src="images/supply-score-map-bar.png" width=800/>
+
+### Demand Score
+
+The demand score is a composite metric that combines various indicators of potential customer traffic within each metro station catchment area. Each indicator is assigned a weight based on its presumed influence on cafe demand. For instance, indicators like storefronts and bus stops likely have a stronger influence than parks or bike routes. The final demand score is calculated by scaling and summing the weighted contributions of each indicator.
+
+Catchment areas are ranked according to their demand score, as shown in the map below. The map uses a color scheme where darker colors represent higher demand scores. This suggests that areas with a darker color concentration have a greater potential customer base for cafes, due to factors like higher residential density or commercial activity. Unsurprisingly, the highest demand scores are clustered around the downtown core, with a secondary cluster south of the metro center.
+
+<img src="images/demand-score-map-bar.png" width=800/>
+
+## Results & Recommendations
+
+### Supply-Gap Score
+The map below combines the previously discussed supply score and demand score for each metro station catchment area. It presents station IDs alongside the corresponding scores. 
+
+The Supply-Gap Score is a new metric calculated by subtracting the supply score from the demand score for each catchment. This value represents the relative amount of unmet demand in a particular area. In simpler terms, it highlights areas with a high potential customer base (demand) but fewer existing cafes (supply). Catchments with a higher Supply-Gap Score are shaded darker red on the map, indicating greater potential for new cafe establishments due to potentially less competition and high foot traffic.
+
+<img src="images/results-score-map-bar.png" width=800/>
+
+### High-Growth Potential: Top Metro Stations Along the Broadway Extension Line
+The analysis identified several metro station catchment areas with particularly high growth potential for new cafes. Interestingly, three of the top five ranked catchments are located along the Broadway Extension Line, which is currently under construction and set for completion in 2026. This suggests that these areas can expect significant increases in foot traffic once the new stations open.
+
+The map below highlights these top 5 ranked catchments and shows their distribution on the Broadway Extension Line.
+
+<img src="images/results-top5-broadway-ext.png" width=800/>
+
+
+### Visualizing the Top Ranked Catchment: Yaletown-Roundhouse
+
+Yaletown-Roundhouse Station boasts the highest Supply-Gap Score, indicating a potentially strong combination of high demand and lower competition from existing cafes. The figure below offers three perspectives to understand this catchment area in detail:
+
+<img src="images/results-top5-features-yaletown.png" width=800/>
+
+**1. Catchment Overview:**
+
+* **Top 5 Catchments:** The larger map highlights the top 5 ranked catchments and their distribution. This provides a broader context for Yaletown-Roundhouse's position among the top contenders.
+* **Illustrative Features:** Various map points represent the presence of different factors influencing foot traffic in these areas.  
+
+**2. Yaletown-Roundhouse Close-Up:**
+
+* **Zoomed-in Focus:** A more detailed view of Yaletown-Roundhouse provides better vantage into the specific features within its catchment boundaries. 
+
+**3. Yaletown-Roundhouse Metric Breakdown:**
+
+* **Supply-Gap Score Components:** A breakdown of the metrics used to calculate the Supply-Gap Score for Yaletown-Roundhouse helps understand the factors driving its high ranking.
+
+**Next Steps:**
+
+While this visualization offers valuable insights, refer to the full analysis in [`03_process_external_data.ipynb`](./notebooks/03_process_external_data.ipynb) / [`04_join_data.ipynb`](./notebooks/04_join_data.ipynb) for a deeper understanding of:
+* The specific types of features represented by the map markers
+* How each metric was calculated and its weight in determining the Supply-Gap Score.
+
+By combining the insights from this visualization with the detailed analysis, you can gain a more comprehensive picture of the potential for a new cafe in the Yaletown-Roundhouse catchment area. 
+
+## AI Assistance Acknowledgement
+
+This analysis was enhanced with the assistance of several AI tools:
+
+* **ChatGPT:** Provided code suggestions, helped brainstorm analysis concepts, and offered alternative wordings to improve clarity of comments and project documents.
+* **GitHub Copilot:** Assisted with code generation, suggested optimizations, and helped refine data cleaning and analysis code.
+* **Gemini AI:** Aided in ensuring the quality of the README through proofreading, suggesting clearer phrasing, and improving the overall structure of the document.
+
+These AI tools were invaluable in streamlining the analysis process, helping shape ideas, and ensuring a polished final product. 
+
+## Appendices and Additional Resources
+
+* **Appendix:** [`appendix.md`](./appendix.md) 
+* **Jupyter Notebooks:**  [`./notebooks/`](./notebooks/)
+* **Dataset Sources:** [`./data/`](./data/)
