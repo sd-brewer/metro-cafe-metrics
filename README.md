@@ -115,13 +115,11 @@ By combining the insights from this visualization with the detailed analysis, yo
 
 ## AI Assistance Acknowledgement
 
-This analysis was enhanced with the assistance of several AI tools:
+This project was developed with the assistance of AI tools to streamline the development process and refine the final product. These tools included:
 
-* **ChatGPT:** Provided code suggestions, helped brainstorm analysis concepts, and offered alternative wordings to improve clarity of comments and project documents.
-* **GitHub Copilot:** Assisted with code generation, suggested optimizations, and helped refine data cleaning and analysis code.
-* **Gemini AI:** Aided in ensuring the quality of the README through proofreading, suggesting clearer phrasing, and improving the overall structure of the document.
-
-These AI tools were invaluable in streamlining the analysis process, helping shape ideas, and ensuring a polished final product. 
+* **ChatGPT**: Assisted with code suggestions, brainstorming analytical approaches, and improving the clarity of code comments and documentation.
+* **GitHub Copilot**: Supported code generation, offered optimizations, and aided in refining data cleaning and analysis scripts.
+* **Gemini AI**: Contributed to the quality of the README through proofreading, suggesting clearer phrasing, and improving the overall structure.
 
 ## Appendices and Additional Resources
 
